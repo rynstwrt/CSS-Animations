@@ -1,5 +1,5 @@
 # CSS-Patterns
 
-A virtual art experience.
+A virtual art demonstration.
 
 https://rynstwrt.github.io/CSS-Patterns/
