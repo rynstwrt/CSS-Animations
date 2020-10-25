@@ -17,13 +17,16 @@ $elementcolor: $bordercolor;
 
 @keyframes square2
 {
-	0% { transform: rotate(0deg); }
 	100% { transform: rotate(360deg); }
 }
 
 @keyframes square3
 {
-	0% { transform: rotate(0deg); }
+	100% { transform: rotate(360deg); }
+}
+
+@keyframes square4
+{
 	100% { transform: rotate(360deg); }
 }
 
@@ -104,17 +107,24 @@ body
 	}
 }
 
-#square2
+#square4
 {
-	.spinny
+	.row
 	{
-
+		flex: 1;
+		.col
+		{
+			flex: 1;
+			.circle
+			{
+				background-color: $elementcolor;
+				height: 30%;
+				width: 30%;
+				border-radius: 50%;
+				animation-direction: alternate;
+			}
+		}
 	}
-}
-
-#square3
-{
-
 }
 
 @media (min-width: 768px)
