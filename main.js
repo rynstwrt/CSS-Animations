@@ -30,6 +30,21 @@ async function init(rows, columns)
 	const sq2 = $('#square2');
 	populateSquare(sq2, rows, columns);
 
+	const sq2Rows = $('#square2 .row');
+	for (let i = 0; i < rows; ++i)
+	{
+		for (let j = 0; j < columns; ++j)
+		{
+			const elem = $($(sq2Rows[i]).children()[j]);
+			const elem2 = $($(sq2Rows[rows - i - 1]).children()[columns - j - 1]);
+			setTimeout(() =>
+			{
+				elem.css({'animation': 'square2 7s ease-in-out infinite'});
+				elem2.css({'animation': 'square2 7s ease-in-out infinite'});
+			}, i * j * 100);
+		}
+	}
+
 	// Square 3
 	const sq3 = $('#square3');
 	populateSquare(sq3, rows, columns);
@@ -46,7 +61,7 @@ async function init(rows, columns)
 			}, i * j * 20);
 		}
 
-		for (let j = columns; j >= i; j--)
+		for (let j = columns; j >= i; --j)
 		{
 			const elem = $($(sq3Rows[i]).children()[j]);
 			setTimeout(() =>
@@ -55,9 +70,6 @@ async function init(rows, columns)
 			}, i * j * 20);
 		}
 	}
-
-
-
 }
 
 const rows = 15;
