@@ -56,27 +56,20 @@ body
 {
 	background-color: $backgroundcolor;
 	display: flex;
-	flex-direction: column;
-}
-
-.body-row
-{
-	height: 100%;
-	display: flex;
-	justify-content: space-evenly;
 	align-items: center;
+	overflow: hidden;
 }
 
 .square
 {
 	background-color: $elementcolor;
-	$width: 90px;
+	$width: 250px;
 	width: $width;
 	height: $width;
 	display: flex;
 	flex-direction: column;
+	margin-right: 1rem;
 	overflow: hidden;
-	padding: .5rem;
 	border: 1px solid $bordercolor;
 
 	.row
@@ -109,6 +102,35 @@ body
 			}
 		}
 	}
+}
+
+.arrow
+{
+	color: $backgroundcolor;
+	position: absolute;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 2rem;
+	z-index: 1;
+	text-shadow: 0px 0px 5px $elementcolor;
+}
+
+#leftarrow
+{
+	left: 0;
+}
+
+#rightarrow
+{
+	right: 0;
+}
+
+#container
+{
+	display: flex;
+	position: absolute;
+	overflow: hidden;
 }
 
 #square1
