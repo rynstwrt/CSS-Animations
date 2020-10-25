@@ -42,85 +42,130 @@ function populateSquareWithCircles(square, rows, columns)
 	}
 }
 
-async function init(rows, columns)
+function initSquare1(rows, columns)
 {
-	// Square 1
 	const sq1 = $('#square1');
 	populateSquareWithSpinnies(sq1, rows, columns);
+}
 
-	// Square 2
+function initSquare2(rows, columns)
+{
 	const sq2 = $('#square2');
 	populateSquareWithSpinnies(sq2, rows, columns);
 
 	const sq2Rows = $('#square2 .row');
 	for (let i = 0; i < rows; ++i)
 	{
-		for (let j = 0; j < columns; ++j)
+		for (let j = 0; j < i; ++j)
 		{
 			const elem = $($(sq2Rows[i]).children()[j]);
-			const elem2 = $($(sq2Rows[rows - i - 1]).children()[columns - j - 1]);
 			setTimeout(() =>
 			{
-				elem.css({'animation': 'square2 7s ease-in-out infinite'});
-				elem2.css({'animation': 'square2 7s ease-in-out infinite'});
-			}, i * j * 100);
+				elem.css({'animation': 'square2 4s linear infinite'});
+			}, (i + j) * 200);
+		}
+
+		for (let j = columns; j >= i; --j)
+		{
+			const elem = $($(sq2Rows[i]).children()[j]);
+			setTimeout(() =>
+			{
+				elem.css({'animation': 'square2 4s linear infinite'});
+			}, (i + j) * 200);
 		}
 	}
+}
 
-	// Square 3
+function initSquare3(rows, columns)
+{
 	const sq3 = $('#square3');
 	populateSquareWithSpinnies(sq3, rows, columns);
 
 	const sq3Rows = $('#square3 .row');
 	for (let i = 0; i < rows; ++i)
 	{
-		for (let j = 0; j < i; ++j)
+		for (let j = 0; j < columns; ++j)
 		{
 			const elem = $($(sq3Rows[i]).children()[j]);
+			const elem2 = $($(sq3Rows[rows - i - 1]).children()[columns - j - 1]);
 			setTimeout(() =>
 			{
-				elem.css({'animation': 'square3 5s linear infinite'});
-			}, i * j * 20);
-		}
-
-		for (let j = columns; j >= i; --j)
-		{
-			const elem = $($(sq3Rows[i]).children()[j]);
-			setTimeout(() =>
-			{
-				elem.css({'animation': 'square3 5s linear infinite'});
-			}, i * j * 20);
-		}
-	}
-
-	// Square 4
-	const sq4 = $('#square4');
-	populateSquareWithCircles(sq4, rows, columns);
-
-	const sq4Rows = $('#square4 .row');
-	for (let i = rows - 1; i >= 0; --i)
-	{
-		for (let j = columns - 1; j >= 0; --j)
-		{
-			const elem = $($(sq4Rows[i]).children()[j]);
-			setTimeout(() =>
-			{
-				elem.css({'animation': 'square4 1s linear infinite'});
-			}, i * j * 20);
+				elem.css({'animation': 'square3 7s ease-in-out infinite'});
+				elem2.css({'animation': 'square3 7s ease-in-out infinite'});
+			}, i * j * 100);
 		}
 	}
 }
 
+function initSquare4(rows, columns)
+{
+	const sq4 = $('#square4');
+	populateSquareWithCircles(sq4, rows, columns);
+
+	const sq4Rows = $('#square4 .row');
+	for (let i = 0; i < rows; ++i)
+	{
+		for (let j = 0; j < columns; ++j)
+		{
+			const elem = $($(sq4Rows[i]).children()[j]);
+			setTimeout(() =>
+			{
+				elem.css({'animation': 'square4 4s ease-in-out infinite'});
+			}, (i + j) * 200);
+		}
+	}
+}
+
+function initSquare5()
+{
+
+}
+
 const rows = 15;
 const cols = 15;
+let elementColor;
+
+function clear()
+{
+	$('.square').children().remove();
+	$('.square').css({'background-color': elementColor});
+}
 
 $(document).ready(() =>
 {
-	init(rows, cols);
+	elementColor = getComputedStyle(document.body).getPropertyValue('--accentColor');
+
+	$('.square').click(function()
+	{
+		if ($(this).css('background-color') !== 'rgba(0, 0, 0, 0)')
+			$(this).css({'background-color': 'transparent'});
+		else
+			clear();
+	});
+
+	$('#square1').click(function()
+	{
+		if ($(this).css('background-color') === 'rgba(0, 0, 0, 0)')
+			initSquare1(rows, cols);
+	});
+
+	$('#square2').click(() =>
+	{
+		initSquare2(rows, cols);
+	});
+
+	$('#square3').click(() =>
+	{
+		initSquare3(rows, cols);
+	});
+
+	$('#square4').click(() =>
+	{
+		initSquare4(rows, cols);
+	});
 });
 
 $(window).resize(() =>
 {
-	$('.square').children().remove();
-	init(rows, cols);
+	clear();
 });

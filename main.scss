@@ -2,6 +2,11 @@ $backgroundcolor: #2b2a2d;
 $bordercolor: #ffc39c;
 $elementcolor: $bordercolor;
 
+:root
+{
+	--elementColor: $elementcolor;
+}
+
 @keyframes square1
 {
 	0% { transform: rotate(0deg); }
@@ -27,7 +32,13 @@ $elementcolor: $bordercolor;
 
 @keyframes square4
 {
-	100% { transform: rotate(360deg); }
+	50% { transform: scale(1.5); }
+	100% { transform: scale(.5); }
+}
+
+@keyframes square5
+{
+
 }
 
 *
@@ -58,6 +69,7 @@ body
 
 .square
 {
+	background-color: $elementcolor;
 	$width: 90px;
 	width: $width;
 	height: $width;
@@ -78,6 +90,15 @@ body
 			flex-direction: column;
 			justify-content: center;
 			align-items: center;
+
+			.circle
+			{
+				background-color: $elementcolor;
+				height: 30%;
+				width: 30%;
+				border-radius: 50%;
+				animation-direction: alternate;
+			}
 
 			.spinny
 			{
@@ -115,15 +136,29 @@ body
 		.col
 		{
 			flex: 1;
-			.circle
-			{
-				background-color: $elementcolor;
-				height: 30%;
-				width: 30%;
-				border-radius: 50%;
-				animation-direction: alternate;
-			}
 		}
+	}
+}
+
+#square5
+{
+	.row
+	{
+		flex: 1;
+		.col
+		{
+			flex: 1;
+		}
+	}
+}
+
+@media (min-width: 600px)
+{
+	.square
+	{
+		$width: 150px;
+		width: $width;
+		height: $width;
 	}
 }
 
