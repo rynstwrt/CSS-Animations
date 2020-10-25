@@ -1,62 +1,75 @@
-$(document).ready(() =>
+function populateSquare(square, rows, columns)
+{
+	const colWidth = square.width() / columns;
+	const rowHeight = square.height() / rows;
+
+	for (let i = 0; i < rows; ++i)
+	{
+		const typeOfRow = (i % 2 == 0) ? 'row-even' : '';
+		const row = $(`<div class='row ${typeOfRow}' style='height: ${rowHeight}px'></div>`);
+
+		for (let j = 0; j < columns; ++j)
+		{
+			const typeOfColumn = (j % 2 == 0) ? 'col-even' : '';
+			const column = $(`<div class='col ${typeOfColumn}' style='width: ${colWidth}px;'>
+				<div class='spinny'></div>
+			</div>`);
+			row.append(column);
+		}
+		square.append(row);
+	}
+}
+
+async function init(rows, columns)
 {
 	// Square 1
 	const sq1 = $('#square1');
-	const sq1Columns = 15;
-	const sq1Rows = 15;
-	const colWidth = sq1.width() / sq1Columns;
-	const spinnyContainerHeight = sq1.height() / sq1Rows;
-
-	for (let i = 0; i < sq1Columns; ++i)
-	{
-		const typeOfColumn = (i % 2 == 0) ? 'col-even' : 'col-odd';
-		const column = $(`<div class='col ${typeOfColumn}' style='width: ${colWidth}px'></div>`);
-
-		for (let j = 0; j < sq1Rows; ++j)
-		{
-			const spinnyContainer = $(`
-				<div class='spinny-container' style='height: ${spinnyContainerHeight}px'>
-					<div class='spinny'></div>
-				</div>
-				`);
-			column.append(spinnyContainer);
-		}
-
-		sq1.append(column);
-	}
+	populateSquare(sq1, rows, columns);
 
 	// Square 2
 	const sq2 = $('#square2');
-	const sq2Columns = 15;
-	const sq2Rows = 15;
-	const sq2ColWidth = sq2.width() / sq2Columns;
-	const sq2SpinnyContainerHeight = sq2.height() / sq2Rows;
+	populateSquare(sq2, rows, columns);
 
-	for (let i = 0; i < sq2Columns; ++i)
+	// Square 3
+	const sq3 = $('#square3');
+	populateSquare(sq3, rows, columns);
+
+	const sq3Rows = $('#square3 .row');
+	for (let i = 0; i < rows; ++i)
 	{
-		const typeOfColumn = (i % 2 == 0) ? 'col-even' : 'col-odd';
-		const column = $(`<div class='col ${typeOfColumn}' style='width: ${colWidth}px'></div>`);
-
-		for (let j = 0; j < sq2Rows; ++j)
+		for (let j = 0; j < i; ++j)
 		{
-			const spinnyContainer = $(`
-				<div class='spinny-container' style='height: ${spinnyContainerHeight}px'>
-					<div class='spinny'></div>
-				</div>
-				`);
-			column.append(spinnyContainer);
+			const elem = $($(sq3Rows[i]).children()[j]);
+			setTimeout(() =>
+			{
+				elem.css({'animation': 'square3 5s linear infinite'});
+			}, i * j * 20);
 		}
 
-		sq2.append(column);
+		for (let j = columns; j >= i; j--)
+		{
+			const elem = $($(sq3Rows[i]).children()[j]);
+			setTimeout(() =>
+			{
+				elem.css({'animation': 'square3 5s linear infinite'});
+			}, i * j * 20);
+		}
 	}
 
-	const sq2Spinnies = $('#square2 .spinny');
-	for (let i = 0; i < sq2Spinnies.length; ++i)
-	{
-		const spinny = sq2Spinnies[i];
-		setTimeout(() =>
-		{
-			$(spinny).css({'animation': 'square1 3s ease-in-out infinite'});
-		}, i * 50);
-	}
+
+
+}
+
+const rows = 15;
+const cols = 15;
+
+$(document).ready(() =>
+{
+	init(rows, cols);
+});
+
+$(window).resize(() =>
+{
+	$('.square').children().remove();
+	init(rows, cols);
 });

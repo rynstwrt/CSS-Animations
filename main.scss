@@ -1,5 +1,6 @@
-$backgroundcolor: #ffaa71;
-$bordercolor: #e2915b;
+$backgroundcolor: #2b2a2d;
+$bordercolor: #ffc39c;
+$elementcolor: $bordercolor;
 
 @keyframes square1
 {
@@ -20,6 +21,12 @@ $bordercolor: #e2915b;
 	100% { transform: rotate(360deg); }
 }
 
+@keyframes square3
+{
+	0% { transform: rotate(0deg); }
+	100% { transform: rotate(360deg); }
+}
+
 *
 {
 	margin: 0;
@@ -35,101 +42,111 @@ body
 {
 	background-color: $backgroundcolor;
 	display: flex;
-	justify-content: center;
+	flex-direction: column;
+}
+
+.body-row
+{
+	height: 100%;
+	display: flex;
+	justify-content: space-evenly;
 	align-items: center;
 }
 
 .square
 {
-	margin: 1rem;
-}
-
-#square1
-{
-	border: 3px solid $bordercolor;
-	$width: 250px;
+	$width: 90px;
 	width: $width;
 	height: $width;
 	display: flex;
+	flex-direction: column;
 	overflow: hidden;
-	padding: 2rem;
+	padding: .5rem;
+	border: 1px solid $bordercolor;
 
-	.col
+	.row
 	{
 		display: flex;
-		flex-direction: column;
+		justify-content: center;
 
-		.spinny-container
+		.col
 		{
 			display: flex;
+			flex-direction: column;
 			justify-content: center;
 			align-items: center;
 
 			.spinny
 			{
-				background-color: white;
+				background-color: $elementcolor;
 				width: 7%;
 				height: 100%;
 				border-radius: 50px;
-				animation: square1 3s ease-in-out infinite;
 			}
 		}
+	}
+}
+
+#square1
+{
+	.spinny
+	{
+		animation: square1 3s ease-in-out infinite;
 	}
 
 	.col-even
 	{
-		.spinny-container
+		.spinny
 		{
-			.spinny
-			{
-				width: 100%;
-				height: 7%;
-			}
+			width: 100%;
+			height: 7%;
 		}
 	}
 }
 
 #square2
 {
-	border: 3px solid $bordercolor;
-	$width: 250px;
-	width: $width;
-	height: $width;
-	display: flex;
-	overflow: hidden;
-	padding: 2rem;
-
-	.col
-	{
-		display: flex;
-		flex-direction: column;
-
-		.spinny-container
-		{
-			display: flex;
-			justify-content: center;
-			align-items: center;
-
-			.spinny
-			{
-				background-color: white;
-				width: 7%;
-				height: 100%;
-				border-radius: 50px;
-				animation-direction: alternate;
-			}
-		}
-	}
-
 	.col-even
 	{
-		.spinny-container
+		.spinny
 		{
-			.spinny
-			{
-				width: 100%;
-				height: 7%;
-			}
+			width: 100%;
+			height: 7%;
 		}
+	}
+}
+
+#square3
+{
+
+}
+
+@media (min-width: 768px)
+{
+	.square
+	{
+		$width: 200px;
+		width: $width;
+		height: $width;
+	}
+}
+
+@media (min-width: 1200px)
+{
+	.square
+	{
+		$width: 220px;
+		width: $width;
+		height: $width;
+	}
+}
+
+@media (min-width: 1800px)
+{
+	.square
+	{
+		$width: 290px;
+		width: $width;
+		height: $width;
 	}
 }
