@@ -93,9 +93,9 @@ function initSquare3()
 			const elem2 = $($(sq3Rows[rows - i - 1]).children()[columns - j - 1]);
 			setTimeout(() =>
 			{
-				elem.css({'animation': 'square3 7s ease-in-out infinite'});
-				elem2.css({'animation': 'square3 7s ease-in-out infinite'});
-			}, i * j * 100);
+				elem.css({'animation': 'square3 5s ease-in-out infinite'});
+				elem2.css({'animation': 'square3 5s ease-in-out infinite'});
+			}, (i + j) * 100);
 		}
 	}
 }
@@ -110,7 +110,10 @@ function initSquare4()
 	{
 		for (let j = 0; j < $(sq4Rows[i]).children().length; ++j)
 		{
-			 $($(sq4Rows[i]).children()[j]).css({'animation': `square4 2s linear ${(i + j) / 3}s infinite alternate`});
+			setTimeout(() =>
+			{
+				$($(sq4Rows[i]).children()[j]).css({'animation': `square4 1s linear infinite alternate`});
+			}, (i + j) * 100);
 		}
 	}
 }
@@ -125,7 +128,10 @@ function initSquare5()
 	{
 		for (let j = 0; j < $(sq5Rows[i]).children().length; ++j)
 		{
-			 $($(sq5Rows[i]).children()[j]).css({'animation': `square5 3s linear ${(i + j) / 2}s infinite alternate`});
+			setTimeout(() =>
+			{
+				$($(sq5Rows[i]).children()[j]).css({'animation': `square5 3s ease-in-out infinite alternate`});
+			}, (i + j) * 100);
 		}
 	}
 }
@@ -134,6 +140,18 @@ function initSquare6()
 {
 	const sq6 = $('#square6');
 	populateSquareWithCircles(sq6);
+
+	const sq6Rows = $('#square6 .row');
+	for (let i = 0; i < sq6Rows.length; ++i)
+	{
+		for (let j = 0; j < $(sq6Rows[i]).children().length; ++j)
+		{
+			setTimeout(() =>
+			{
+
+			}, (i + j) * 100);
+		}
+	}
 }
 
 function init()
@@ -143,6 +161,7 @@ function init()
 	initSquare3();
 	initSquare4();
 	initSquare5();
+	initSquare6();
 }
 
 $(document).ready(() =>

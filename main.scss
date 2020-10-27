@@ -32,6 +32,12 @@ $elementcolor: $bordercolor;
 
 @keyframes square5
 {
+	50% { transform: translateY(.17rem); }
+	100% { transform: translateY(-.17rem); }
+}
+
+@keyframes square6
+{
 	50% { transform: translateY(.2rem); }
 	100% { transform: translateY(-.2rem); }
 }
@@ -65,13 +71,14 @@ body
 
 .square
 {
-	$width: 100px;
+	$width: 85px;
 	width: $width;
 	height: $width;
 	display: flex;
 	flex-direction: column;
 	position: relative;
 	overflow: hidden;
+	padding: .5rem;
 	border: 1px solid $bordercolor;
 
 	.row
@@ -151,8 +158,9 @@ body
 {
 	.square
 	{
-		$width: 200px;
+		$width: 190px;
 		width: $width;
 		height: $width;
+		padding: 1rem;
 	}
 }
