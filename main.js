@@ -45,35 +45,35 @@ function populateSquareWithCircles(square)
 	}
 }
 
-function initSquare1()
-{
-	const sq1 = $('#square1');
-	populateSquareWithSpinnies(sq1);
-}
-
 function initSquare2()
 {
 	const sq2 = $('#square2');
 	populateSquareWithSpinnies(sq2);
+}
 
-	const sq2Rows = $('#square2 .row');
+function initSquare1()
+{
+	const sq1 = $('#square1');
+	populateSquareWithSpinnies(sq1);
+
+	const sq1Rows = $('#square1 .row');
 	for (let i = 0; i < rows; ++i)
 	{
 		for (let j = 0; j < i; ++j)
 		{
-			const elem = $($(sq2Rows[i]).children()[j]);
+			const elem = $($(sq1Rows[i]).children()[j]);
 			setTimeout(() =>
 			{
-				elem.css({'animation': 'square2 4s linear infinite'});
+				elem.css({'animation': 'square1 4s linear infinite'});
 			}, (i + j) * 200);
 		}
 
 		for (let j = columns; j >= i; --j)
 		{
-			const elem = $($(sq2Rows[i]).children()[j]);
+			const elem = $($(sq1Rows[i]).children()[j]);
 			setTimeout(() =>
 			{
-				elem.css({'animation': 'square2 4s linear infinite'});
+				elem.css({'animation': 'square1 4s linear infinite'});
 			}, (i + j) * 200);
 		}
 	}
@@ -124,34 +124,30 @@ function initSquare5()
 	populateSquareWithCircles(sq5);
 
 	const sq5Rows = $('#square5 .row');
-	for (let i = 0; i < sq5Rows.length; ++i)
+	for (let i = 0; i < sq5Rows.length / 2; ++i)
 	{
-		for (let j = 0; j < $(sq5Rows[i]).children().length; ++j)
+		for (let j = $(sq5Rows[i]).children().length; j >= 0 ; --j)
 		{
 			setTimeout(() =>
 			{
-				$($(sq5Rows[i]).children()[j]).css({'animation': `square5 3s ease-in-out infinite alternate`});
-			}, (i + j) * 100);
+				const elem1 = $($(sq5Rows[i]).children()[j]);
+				const elem2 = $($(sq5Rows[i]).children()[rows - 1 - j]);
+				const elem3 = $($(sq5Rows[columns - 1 - i]).children()[j]);
+				const elem4 = $($(sq5Rows[columns - 1 - i]).children()[rows - 1 - j]);
+				elem1.css({'animation': `square5 1s linear infinite alternate`});
+				elem2.css({'animation': `square5 1s linear infinite alternate`});
+				elem3.css({'animation': `square5 1s linear infinite alternate`});
+				elem4.css({'animation': `square5 1s linear infinite alternate`});
+			}, (i * j) * 100);
 		}
 	}
+
 }
 
 function initSquare6()
 {
 	const sq6 = $('#square6');
 	populateSquareWithCircles(sq6);
-
-	const sq6Rows = $('#square6 .row');
-	for (let i = 0; i < sq6Rows.length; ++i)
-	{
-		for (let j = 0; j < $(sq6Rows[i]).children().length; ++j)
-		{
-			setTimeout(() =>
-			{
-
-			}, (i + j) * 100);
-		}
-	}
 }
 
 function init()
