@@ -37,7 +37,8 @@ $elementcolor: $bordercolor;
 
 @keyframes square6
 {
-	100% { transform: scale(2); }
+	50% { transform: translateY(.1rem) }
+	100% { transform: rotate(-.1rem); }
 }
 
 @keyframes square7
@@ -198,6 +199,11 @@ body
 			height: 7%;
 		}
 	}
+}
+
+#square6
+{
+
 }
 
 #square7
