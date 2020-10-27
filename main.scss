@@ -40,6 +40,30 @@ $elementcolor: $bordercolor;
 
 }
 
+@keyframes square7
+{
+	0% { transform: rotate(0deg); }
+	13% { transform: rotate(45deg); }
+	25% { transform: rotate(90deg); }
+	38% { transform: rotate(135deg); }
+	50% { transform: rotate(180deg); }
+	63% { transform: rotate(225deg); }
+	75% { transform: rotate(270deg); }
+	88% { transform: rotate(315deg); }
+	100% { transform: rotate(360deg); }
+}
+
+@keyframes square8
+{
+	50% { transform: rotate(180deg); }
+	100% { transform: rotate(360deg); }
+}
+
+@keyframes square9
+{
+	100% { transform: rotate(360deg); }
+}
+
 *
 {
 	margin: 0;
@@ -79,6 +103,44 @@ body
 	padding: .5rem;
 	border: 1px solid $bordercolor;
 
+	.row-even
+	{
+		.col-even
+		{
+			.triangle
+			{
+				clip-path: polygon(50% 100%, 0% 0%, 100% 0%) !important;
+			}
+		}
+
+		.col:not(.col-even)
+		{
+			.triangle
+			{
+				clip-path: polygon(50% 0%, 0% 100%, 100% 100%) !important;
+			}
+		}
+	}
+
+	.row:not(.row-even)
+	{
+		.col-even
+		{
+			.triangle
+			{
+				clip-path: polygon(50% 0%, 0% 100%, 100% 100%) !important;
+			}
+		}
+
+		.col:not(.col-even)
+		{
+			.triangle
+			{
+				clip-path: polygon(50% 100%, 0% 0%, 100% 0%) !important;
+			}
+		}
+	}
+
 	.row
 	{
 		display: flex;
@@ -98,6 +160,14 @@ body
 				width: 30%;
 				border-radius: 50%;
 				animation-direction: alternate;
+			}
+
+			.triangle
+			{
+				background-color: $elementcolor;
+				height: 70%;
+				width: 70%;
+				clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
 			}
 
 			.spinny
@@ -149,6 +219,14 @@ body
 		{
 			flex: 1;
 		}
+	}
+}
+
+#square7
+{
+	.triangle
+	{
+		animation: square7 3s ease-in-out infinite alternate;
 	}
 }
 

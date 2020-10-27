@@ -45,6 +45,29 @@ function populateSquareWithCircles(square)
 	}
 }
 
+function populateSquareWithTriangles(square)
+{
+	const colWidth = square.width() / columns;
+	const rowHeight = square.height() / rows;
+
+	for (let i = 0; i < rows; ++i)
+	{
+		const typeOfRow = (i % 2 == 0) ? 'row-even' : '';
+		const row = $(`<div class='row ${typeOfRow}' style='height: ${rowHeight}px'></div>`);
+
+		for (let j = 0; j < columns; ++j)
+		{
+			const typeOfColumn = (j % 2 == 0) ? 'col-even' : '';
+			const column = $(`<div class='col ${typeOfColumn}' style='width: ${colWidth}px;'>
+				<div class='triangle'></div>
+			</div>`);
+			row.append(column);
+		}
+		square.append(row);
+	}
+}
+
+
 function initSquare2()
 {
 	const sq2 = $('#square2');
@@ -150,6 +173,50 @@ function initSquare6()
 	populateSquareWithCircles(sq6);
 }
 
+function initSquare7()
+{
+	const sq7 = $('#square7');
+	populateSquareWithTriangles(sq7);
+}
+
+function initSquare8()
+{
+	const sq8 = $('#square8');
+	populateSquareWithTriangles(sq8);
+
+	for (let i = 0; i < sq8.children().length; ++i)
+	{
+		const row = $(sq8.children()[i]);
+		for (let j = 0; j < row.children().length; ++j)
+		{
+			const elem = $(row.children()[j]);
+			if (j % 2 == 0)
+				elem.css({'animation': 'square8 3s ease-in-out infinite alternate'});
+			else
+				elem.css({'animation': 'square8 3s ease-in-out infinite alternate-reverse'});
+		}
+	}
+}
+
+function initSquare9()
+{
+	const sq9 = $('#square9');
+	populateSquareWithTriangles(sq9);
+
+	for (let i = 0; i < sq9.children().length; ++i)
+	{
+		const row = $(sq9.children()[i]);
+		for (let j = 0; j < row.children().length; ++j)
+		{
+			const elem = $(row.children()[j]);
+			setTimeout(() =>
+			{
+				elem.css({'animation': 'square9 3s ease infinite alternate'});
+			}, Math.cos(j + i) * (180 / Math.PI) * 30);
+		}
+	}
+}
+
 function init()
 {
 	initSquare1();
@@ -157,7 +224,10 @@ function init()
 	initSquare3();
 	initSquare4();
 	initSquare5();
-	initSquare6();
+	//initSquare6();
+	initSquare7();
+	initSquare8();
+	initSquare9();
 }
 
 $(document).ready(() =>
