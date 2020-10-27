@@ -175,9 +175,9 @@ function initSquare8()
 		{
 			const elem = $(row.children()[j]);
 			if (j % 2 == 0)
-				elem.css({'animation': 'square8 3s ease-in-out infinite alternate'});
+				elem.css({'transform-origin': 'top', 'animation': 'square8 3s ease-in-out infinite'});
 			else
-				elem.css({'animation': 'square8 3s ease-in-out infinite alternate-reverse'});
+				elem.css({'transform-origin': 'bottom', 'animation': 'square8 3s ease-in-out infinite reverse'});
 		}
 	}
 }
