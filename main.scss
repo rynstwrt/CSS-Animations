@@ -27,17 +27,17 @@ $elementcolor: $bordercolor;
 
 @keyframes square4
 {
-	100% { transform: scale(1.9); }
+	100% { transform: scale(2.3); }
 }
 
 @keyframes square5
 {
-	100% { transform: scale(1.9); }
+	100% { transform: scale(2.3); }
 }
 
 @keyframes square6
 {
-	100% { transform: scale(1.9); }
+	100% { transform: scale(2); }
 }
 
 @keyframes square7
@@ -156,8 +156,8 @@ body
 			.circle
 			{
 				background-color: $elementcolor;
-				height: 30%;
-				width: 30%;
+				height: 20%;
+				width: 20%;
 				border-radius: 50%;
 				animation-direction: alternate;
 			}
@@ -185,7 +185,7 @@ body
 {
 	.spinny
 	{
-		animation: square2 3s ease-in-out infinite;
+		animation: square2 4s ease-in-out infinite;
 	}
 
 	.col-even
@@ -194,30 +194,6 @@ body
 		{
 			width: 100%;
 			height: 7%;
-		}
-	}
-}
-
-#square4
-{
-	.row
-	{
-		flex: 1;
-		.col
-		{
-			flex: 1;
-		}
-	}
-}
-
-#square5
-{
-	.row
-	{
-		flex: 1;
-		.col
-		{
-			flex: 1;
 		}
 	}
 }
