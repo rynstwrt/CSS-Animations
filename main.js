@@ -110,6 +110,7 @@ function initSquare3()
 	const sq3Rows = $('#square3 .row');
 	for (let i = 0; i < rows; ++i)
 	{
+		const row = $(sq3Rows[i]);
 		for (let j = 0; j < columns; ++j)
 		{
 			const elem = $($(sq3Rows[i]).children()[j]);
@@ -131,12 +132,14 @@ function initSquare4()
 	const sq4Rows = $('#square4 .row');
 	for (let i = 0; i < sq4Rows.length; ++i)
 	{
-		for (let j = 0; j < $(sq4Rows[i]).children().length; ++j)
+		const row = $(sq4Rows[i]);
+		for (let j = 0; j < row.children().length; ++j)
 		{
+			const elem = $(row.children()[j]);
 			setTimeout(() =>
 			{
-				$($(sq4Rows[i]).children()[j]).css({'animation': `square4 1s linear infinite alternate`});
-			}, (i + j) * 100);
+				elem.css({'animation': `square4 1s linear infinite alternate`});
+			}, ((rows - i - 1) + j) * 100);
 		}
 	}
 }
@@ -171,6 +174,19 @@ function initSquare6()
 {
 	const sq6 = $('#square6');
 	populateSquareWithCircles(sq6);
+
+	for (let i = 0; i < sq6.children().length; ++i)
+	{
+		const row = $(sq6.children()[i]);
+		for (let j = 0; j < row.children().length; ++j)
+		{
+			const elem = $(row.children()[j]);
+			setTimeout(() =>
+			{
+				elem.css({'animation': 'square6 1s linear infinite alternate'});
+			}, (i % 2 == 0) ? (columns - j - 1) * 100 : (j) * 100 + 1000);
+		}
+	}
 }
 
 function initSquare7()
@@ -224,7 +240,7 @@ function init()
 	initSquare3();
 	initSquare4();
 	initSquare5();
-	//initSquare6();
+	initSquare6();
 	initSquare7();
 	initSquare8();
 	initSquare9();
