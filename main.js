@@ -240,6 +240,7 @@ function init(shouldPresent)
 	{
 		const squares = $('.square');
 		squares.addClass('square-blocked');
+		squares.css({'transition': 'background-color 1s'});
 
 		for (let i = 0; i < squares.length; ++i)
 		{
@@ -248,7 +249,6 @@ function init(shouldPresent)
 
 			setTimeout(() =>
 			{
-				square.css({'transition': 'background-color 1s'});
 				square.removeClass('square-blocked');
 			}, i * 3000);
 		}
