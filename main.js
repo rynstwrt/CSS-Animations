@@ -129,7 +129,7 @@ function initSquare4()
 		for (let j = 0; j < row.children().length; ++j)
 		{
 			const elem = $($(row.children()[j]).children()[0]);
-			const delayAmount = (i + j) * .2;
+			const delayAmount = (i + j) * .1;
 			elem.css({'animation-delay': `${delayAmount}s`});
 		}
 	}
@@ -140,14 +140,23 @@ function initSquare5()
 	const sq5 = $('#square5');
 	populateSquareWithCircles(sq5);
 
-	for (let i = 0; i < sq5.children().length; ++i)
+	const sq5Rows = $('#square5 .row');
+	for (let i = 0; i < sq5Rows.length; ++i)
 	{
-		const row = $(sq5.children()[i]);
+		const row = $(sq5Rows[i]);
 		for (let j = 0; j < row.children().length; ++j)
 		{
 			const elem = $($(row.children()[j]).children()[0]);
-			const delayAmount = (i % 2 == 0) ? (columns - j - 1) * .3 : (j) * .3 + 1;
-			elem.css({'animation-delay': `${delayAmount}s`});
+			if (i % 2 == 0)
+			{
+				const delayAmount = j * .3;
+				elem.css({'animation-delay': `${delayAmount}s`});
+			}
+			else
+			{
+				const delayAmount = (columns - j) * .3;
+				elem.css({'animation-delay': `${delayAmount}s`});
+			}
 		}
 	}
 }
