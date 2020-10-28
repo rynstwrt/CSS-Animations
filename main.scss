@@ -27,17 +27,17 @@ $elementcolor: $bordercolor;
 
 @keyframes square4
 {
-	100% { transform: scale(2.3); }
+	100% { transform: scale(3.5); }
 }
 
 @keyframes square5
 {
-	100% { transform: scale(2.3); }
+	100% { transform: scale(3.5); }
 }
 
 @keyframes square6
 {
-	100% { transform: scale(2); }
+	100% { transform: scale(3.5); }
 }
 
 @keyframes square7
@@ -55,9 +55,7 @@ $elementcolor: $bordercolor;
 
 @keyframes square8
 {
-	25% { transform: rotate(90deg); }
 	50% { transform: rotate(180deg); }
-	75% { transform: rotate(270deg); }
 	100% { transform: rotate(360deg); }
 }
 
@@ -206,6 +204,26 @@ body
 	{
 		animation: square7 3s ease-in-out infinite alternate;
 	}
+}
+
+#square8
+{
+	.col-even
+	{
+		.triangle
+		{
+			animation: square8 3s ease infinite alternate;
+		}
+	}
+
+	.col:not(.col-even)
+	{
+		.triangle
+		{
+			animation: square8 3s ease infinite alternate-reverse;
+		}
+	}
+
 }
 
 @media (min-width: 700px)

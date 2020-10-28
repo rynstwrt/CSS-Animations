@@ -129,7 +129,7 @@ function initSquare4()
 		for (let j = 0; j < row.children().length; ++j)
 		{
 			const elem = $(row.children()[j]);
-			elem.css({'animation': `square4 2s ${(i + (columns - j - 1)) * .2}s linear infinite alternate`});
+			elem.css({'animation': `square4 2s ${(i + (columns - j - 1)) * .2}s ease infinite alternate`});
 		}
 	}
 }
@@ -145,8 +145,8 @@ function initSquare5()
 		for (let j = 0; j < row.children().length; ++j)
 		{
 			const elem = $(row.children()[j]);
-			const delayAmount = (i % 2 == 0) ? (columns - j - 1) * .1 : (j) * .1 + 1;
-			elem.css({'animation': `square5 1s ${delayAmount}s linear infinite alternate`});
+			const delayAmount = (i % 2 == 0) ? (columns - j - 1) * .6 : (j) * .6 + 1;
+			elem.css({'animation': `square5 1s ${delayAmount}s ease infinite alternate`});
 		}
 	}
 }
@@ -167,19 +167,6 @@ function initSquare8()
 {
 	const sq8 = $('#square8');
 	populateSquareWithTriangles(sq8);
-
-	for (let i = 0; i < sq8.children().length; ++i)
-	{
-		const row = $(sq8.children()[i]);
-		for (let j = 0; j < row.children().length; ++j)
-		{
-			const elem = $(row.children()[j]);
-			if (j % 2 == 0)
-				elem.css({'transform-origin': 'top', 'animation': 'square8 3s ease-in-out infinite'});
-			else
-				elem.css({'transform-origin': 'bottom', 'animation': 'square8 3s ease-in-out infinite reverse'});
-		}
-	}
 }
 
 function initSquare9()
