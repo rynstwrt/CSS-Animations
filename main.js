@@ -155,6 +155,18 @@ function initSquare6()
 {
 	const sq6 = $('#square6');
 	populateSquareWithCircles(sq6);
+
+	for (let i = 0; i < sq6.children().length; ++i)
+	{
+		const row = $(sq6.children()[i]);
+		for (let j = 0; j < row.children().length / 2; ++j)
+		{
+			const elem = $($(row.children()[j]).children()[0]);
+			const elem2 = $($(row.children()[columns - j - 1]).children()[0]);
+			elem.css({'animation': `square6 2s ${j / 10 + i / 10}s ease-in-out infinite alternate`});
+			elem2.css({'animation': `square6 2s ${j / 10 + i / 10}s ease-in-out infinite alternate`});
+		}
+	}
 }
 
 function initSquare7()
