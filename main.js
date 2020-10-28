@@ -1,5 +1,5 @@
-const rows = 15;
-const columns = 15;
+const rows = 10;
+const columns = 10;
 
 function populateSquareWithSpinnies(square)
 {
