@@ -22,7 +22,7 @@ $elementcolor: $bordercolor;
 
 @keyframes square3
 {
-	100% { transform: rotate(360deg); }
+	100% { transform: rotate(-360deg); }
 }
 
 @keyframes square4
@@ -177,6 +177,14 @@ body
 	}
 }
 
+#square1
+{
+	.spinny
+	{
+		animation: square1 4s linear infinite;
+	}
+}
+
 #square2
 {
 	.spinny
@@ -191,6 +199,38 @@ body
 			width: 100%;
 			height: 7%;
 		}
+	}
+}
+
+#square3
+{
+	.spinny
+	{
+		animation: square3 4s ease-in-out infinite;
+	}
+}
+
+#square4
+{
+	.circle
+	{
+		animation: square4 2s ease infinite alternate;
+	}
+}
+
+#square5
+{
+	.circle
+	{
+		animation: square5 1s linear infinite alternate;
+	}
+}
+
+#square6
+{
+	.circle
+	{
+		animation: square6 2s linear infinite alternate;
 	}
 }
 
@@ -219,7 +259,14 @@ body
 			animation: square8 3s ease infinite alternate-reverse;
 		}
 	}
+}
 
+#square9
+{
+	.triangle
+	{
+		animation: square9 3s ease infinite alternate;
+	}
 }
 
 @media (min-width: 700px)

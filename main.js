@@ -79,14 +79,14 @@ function initSquare1()
 		{
 			const col = $($(sq1Rows[i]).children()[j]);
 			const elem = $(col.children()[0]);
-			elem.css({'animation': `square1 4s ${(i + j) * .2}s linear infinite`});
+			elem.css({'animation-delay': `${(i + j) * .2}s`});
 		}
 
 		for (let j = columns; j >= i; --j)
 		{
 			const col = $($(sq1Rows[i]).children()[j]);
 			const elem = $(col.children()[0]);
-			elem.css({'animation': `square1 4s ${(i + j) * .2}s linear infinite`});
+			elem.css({'animation-delay': `${(i + j) * .2}s`});
 		}
 	}
 }
@@ -108,11 +108,11 @@ function initSquare3()
 		const row = $(sq3Rows[i]);
 		for (let j = 0; j < columns; ++j)
 		{
-			const elem = $($($(sq3Rows[i]).children()[j]).children()[0]);
-			const elem2 = $($($(sq3Rows[rows - i - 1]).children()[j]).children()[0]);
+			const elem1 = $($($(sq3Rows[i]).children()[columns - j - 1]).children()[0]);
+			const elem2 = $($($(sq3Rows[rows - i - 1]).children()[columns - j - 1]).children()[0]);
 			const delayAmount = (i + j) * .2;
-			elem.css({'animation': `square3 4s ${delayAmount}s ease-in-out infinite`});
-			elem2.css({'animation': `square3 4s ${delayAmount}s ease-in-out infinite`});
+			elem1.css({'animation-delay': `${delayAmount}s`});
+			elem2.css({'animation-delay': `${delayAmount}s`});
 		}
 	}
 }
@@ -128,8 +128,9 @@ function initSquare4()
 		const row = $(sq4Rows[i]);
 		for (let j = 0; j < row.children().length; ++j)
 		{
-			const elem = $(row.children()[j]);
-			elem.css({'animation': `square4 2s ${(i + (columns - j - 1)) * .2}s ease infinite alternate`});
+			const elem = $($(row.children()[j]).children()[0]);
+			const delayAmount = (i + j) * .2;
+			elem.css({'animation-delay': `${delayAmount}s`});
 		}
 	}
 }
@@ -144,9 +145,9 @@ function initSquare5()
 		const row = $(sq5.children()[i]);
 		for (let j = 0; j < row.children().length; ++j)
 		{
-			const elem = $(row.children()[j]);
-			const delayAmount = (i % 2 == 0) ? (columns - j - 1) * .6 : (j) * .6 + 1;
-			elem.css({'animation': `square5 1s ${delayAmount}s ease infinite alternate`});
+			const elem = $($(row.children()[j]).children()[0]);
+			const delayAmount = (i % 2 == 0) ? (columns - j - 1) * .3 : (j) * .3 + 1;
+			elem.css({'animation-delay': `${delayAmount}s`});
 		}
 	}
 }
@@ -156,15 +157,21 @@ function initSquare6()
 	const sq6 = $('#square6');
 	populateSquareWithCircles(sq6);
 
-	for (let i = 0; i < sq6.children().length; ++i)
+	for (let i = 0; i < sq6.children().length / 2; ++i)
 	{
-		const row = $(sq6.children()[i]);
-		for (let j = 0; j < row.children().length / 2; ++j)
+		const row1 = $(sq6.children()[i]);
+		const row2 = $(sq6.children()[rows - i - 1]);
+		for (let j = 0; j < row1.children().length / 2; ++j)
 		{
-			const elem = $($(row.children()[j]).children()[0]);
-			const elem2 = $($(row.children()[columns - j - 1]).children()[0]);
-			elem.css({'animation': `square6 2s ${j / 10 + i / 10}s ease-in-out infinite alternate`});
-			elem2.css({'animation': `square6 2s ${j / 10 + i / 10}s ease-in-out infinite alternate`});
+			const delayAmount = (columns - j - 1) / 10 + (rows - i - 1) / 10;
+			const elem1 = $($(row1.children()[j]).children()[0]);
+			const elem2 = $($(row1.children()[columns - j - 1]).children()[0]);
+			const elem3 = $($(row2.children()[j]).children()[0]);
+			const elem4 = $($(row2.children()[columns - j - 1]).children()[0]);
+			elem1.css({'animation-delay': `${delayAmount}s`});
+			elem2.css({'animation-delay': `${delayAmount}s`});
+			elem3.css({'animation-delay': `${delayAmount}s`});
+			elem4.css({'animation-delay': `${delayAmount}s`});
 		}
 	}
 }
@@ -193,7 +200,7 @@ function initSquare9()
 		{
 			const elem = $(row.children()[j]);
 			const delayAmount = Math.sin(i+j) + 1;
-			elem.css({'animation': `square9 3s ${delayAmount}s ease infinite alternate`});
+			elem.css({'animation-delay': `${delayAmount}s`});
 		}
 	}
 }
