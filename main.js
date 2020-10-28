@@ -233,27 +233,8 @@ function initSquare9()
 	}
 }
 
-function init(shouldPresent)
+function init()
 {
-	// Present each square
-	if (shouldPresent)
-	{
-		const squares = $('.square');
-		squares.addClass('square-blocked');
-		squares.css({'transition': 'background-color 1s'});
-
-		for (let i = 0; i < squares.length; ++i)
-		{
-			const squareIndex = i;
-			const square = $(squares[squareIndex]);
-
-			setTimeout(() =>
-			{
-				square.removeClass('square-blocked');
-			}, i * 3000);
-		}
-	}
-
 	initSquare1();
 	initSquare2();
 	initSquare3();
@@ -267,11 +248,11 @@ function init(shouldPresent)
 
 $(document).ready(() =>
 {
-	init(true);
+	init();
 });
 
 $(window).resize(() =>
 {
 	$('.square').children().remove();
-	init(false);
+	init();
 });
