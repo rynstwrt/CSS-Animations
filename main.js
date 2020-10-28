@@ -186,7 +186,7 @@ function initSquare6()
 			}
 			else
 			{
-				const delayAmount = (columns - j) * .3;
+				const delayAmount = (columns - j - 1) * .3;
 				elem.css({'animation-delay': `${delayAmount}s`});
 			}
 		}
@@ -197,6 +197,17 @@ function initSquare7()
 {
 	const sq7 = $('#square7');
 	populateSquareWithTriangles(sq7);
+
+	for (let i = 0; i < sq7.children().length; ++i)
+	{
+		const row = $(sq7.children()[i]);
+		for (let j = 0; j < row.children().length; ++j)
+		{
+			const elem = $($(row.children()[j]).children()[0]);
+			const delayAmount = j * .1;
+			elem.css({'animation-delay': `${delayAmount}s`});
+		}
+	}
 }
 
 function initSquare8()
@@ -215,15 +226,34 @@ function initSquare9()
 		const row = $(sq9.children()[i]);
 		for (let j = 0; j < row.children().length; ++j)
 		{
-			const elem = $(row.children()[j]);
-			const delayAmount = Math.sin(i+j) + 1;
+			const elem = $($(row.children()[j]).children()[0]);
+			const delayAmount = Math.log10(i + (columns - j - 1));
 			elem.css({'animation-delay': `${delayAmount}s`});
 		}
 	}
 }
 
-function init()
+function init(shouldPresent)
 {
+	// Present each square
+	if (shouldPresent)
+	{
+		const squares = $('.square');
+		squares.addClass('square-blocked');
+
+		for (let i = 0; i < squares.length; ++i)
+		{
+			const squareIndex = i;
+			const square = $(squares[squareIndex]);
+
+			setTimeout(() =>
+			{
+				square.css({'transition': 'background-color 1s'});
+				square.removeClass('square-blocked');
+			}, i * 3000);
+		}
+	}
+
 	initSquare1();
 	initSquare2();
 	initSquare3();
@@ -237,11 +267,11 @@ function init()
 
 $(document).ready(() =>
 {
-	init();
+	init(true);
 });
 
 $(window).resize(() =>
 {
 	$('.square').children().remove();
-	init();
+	init(false);
 });
