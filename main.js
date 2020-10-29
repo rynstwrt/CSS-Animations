@@ -106,9 +106,12 @@ function moveSlider(direction)
 
 	const slider = $('#slider');
 
-	slider.css({'margin-left': `${-100 * (index - 1)}vmin`});
-	const currentLeft = slider.css('margin-left');
-	console.log(currentLeft);
+	// left is half the square size + left margin
+
+	const squareWidth = $(`#square${index}`).width();
+	const squareMarginLeft = $(`#square${index}`).css('margin-left');
+
+	console.log(squareMarginLeft);
 
 	previousSquare.children().remove();
 }
