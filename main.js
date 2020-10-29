@@ -1,3 +1,4 @@
+const browserTransitionEndEvents = 'transitionend webkitTransitionEnd oTransitionEnd otransitionend MSTransitionEnd';
 const numSquares = 9;
 const rows = 15;
 const columns = 15;
@@ -105,15 +106,15 @@ function moveSlider(direction)
 	}
 
 	const slider = $('#slider');
+ 	const squareMarginLeft = parseInt($(`#square${index}`).css('margin-left'));
+	const leftEquation = window.innerWidth * (index - 1) - squareMarginLeft * (index - 1);
 
-	// left is half the square size + left margin
+	slider.css({'margin-left': `${-leftEquation}px`});
 
-	const squareWidth = $(`#square${index}`).width();
-	const squareMarginLeft = $(`#square${index}`).css('margin-left');
-
-	console.log(squareMarginLeft);
-
-	previousSquare.children().remove();
+	slider.one(browserTransitionEndEvents, () =>
+	{
+		previousSquare.children().remove();
+	});
 }
 
 $(document).ready(() =>
