@@ -1,5 +1,7 @@
-const rows = 10;
-const columns = 10;
+const numSquares = 9;
+const rows = 15;
+const columns = 15;
+let index = 1;
 
 function populateSquareWithSpinnies(square)
 {
@@ -67,26 +69,71 @@ function populateSquareWithTriangles(square)
 	}
 }
 
-function init()
+function moveSlider(direction)
 {
-	initSquare1();
-	initSquare2();
-	initSquare3();
-	initSquare4();
-	initSquare5();
-	initSquare6();
-	initSquare7();
-	initSquare8();
-	initSquare9();
+	const previousSquare = (direction === 'right') ? $(`#square${index - 1}`) : $(`#square${index + 1}`);
+
+	switch (index)
+	{
+		case 1:
+			initSquare1();
+			break;
+		case 2:
+			initSquare2();
+			break;
+		case 3:
+			initSquare3();
+			break;
+		case 4:
+			initSquare4();
+			break;
+		case 5:
+			initSquare5();
+			break;
+		case 6:
+			initSquare6();
+			break;
+		case 7:
+			initSquare7();
+			break;
+		case 8:
+			initSquare8();
+			break;
+		case 9:
+			initSquare9();
+			break;
+	}
+
+	const slider = $('#slider');
+
+	slider.css({'margin-left': `${-100 * (index - 1)}vmin`});
+	const currentLeft = slider.css('margin-left');
+	console.log(currentLeft);
+
+	previousSquare.children().remove();
 }
 
 $(document).ready(() =>
 {
-	init();
+	initSquare1();
+
+	$('#leftarrow').click(() =>
+	{
+		if (index <= 1) return;
+		--index;
+		moveSlider('left');
+	});
+
+	$('#rightarrow').click(() =>
+	{
+		if (index >= numSquares) return;
+		++index;
+		moveSlider('right');
+	});
 });
 
-$(window).resize(() =>
-{
-	$('.square').children().remove();
-	init();
-});
+// $(window).resize(() =>
+// {
+// 	$('.square').children().remove();
+// 	init();
+// });
