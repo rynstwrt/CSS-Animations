@@ -1,5 +1,3 @@
-# CSS-Patterns
-
-A virtual art demonstration.
+# An art demonstration created using CSS animations.
 
 https://rynstwrt.github.io/CSS-Patterns/
