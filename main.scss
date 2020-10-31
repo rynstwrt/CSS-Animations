@@ -308,3 +308,40 @@ body
 		animation: square9 3s ease infinite alternate;
 	}
 }
+
+@media (min-width: 576px)
+{
+	.square
+	{
+		$size: 220px;
+		min-width: $size;
+		height: $size;
+		margin-left: calc((100vw - #{$size}) / 2);
+		margin-right: calc((100vw - #{$size}) / 2);
+	}
+
+	#viewbox
+	{
+		height: 70%;
+	}
+
+	#controls
+	{
+		align-items: center;
+	}
+}
+
+@media (min-width: 768px)
+{
+
+}
+
+@media (min-width: 992px)
+{
+
+}
+
+@media (min-width: 1200px)
+{
+
+}
