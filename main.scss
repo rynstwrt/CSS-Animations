@@ -76,6 +76,12 @@ body
 	flex-direction: column;
 	justify-content: space-between;
 	font-family: 'Montserrat', sans-serif;
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
 }
 
 .square
@@ -172,7 +178,7 @@ body
 
 .disabled
 {
-	color: gray !important;
+	visibility: hidden;
 }
 
 #viewbox
@@ -204,6 +210,7 @@ body
 		display: inline-block;
 		font-size: 3.5rem;
 		font-weight: normal;
+		cursor: pointer;
 	}
 
 	#leftarrow
@@ -333,15 +340,88 @@ body
 
 @media (min-width: 768px)
 {
+	.square
+	{
+		$size: 600px;
+		min-width: $size;
+		height: $size;
+		margin-left: calc((100vw - #{$size}) / 2);
+		margin-right: calc((100vw - #{$size}) / 2);
+	}
 
+	#controls
+	{
+		#leftarrow, #rightarrow
+		{
+			font-size: 7rem;
+		}
+
+		#leftarrow
+		{
+			margin-left: 10rem;
+		}
+
+		#rightarrow
+		{
+			margin-right: 10rem;
+		}
+	}
 }
 
 @media (min-width: 992px)
 {
+	.square
+	{
+		$size: 450px;
+		min-width: $size;
+		height: $size;
+		margin-left: calc((100vw - #{$size}) / 2);
+		margin-right: calc((100vw - #{$size}) / 2);
+	}
 
+	#controls
+	{
+		justify-content: center;
+		#leftarrow
+		{
+			margin-right: 10rem;
+		}
+
+		#rightarrow
+		{
+			margin-left: 10rem;
+		}
+	}
 }
 
 @media (min-width: 1200px)
 {
+	.square
+	{
+		$size: 400px;
+		min-width: $size;
+		height: $size;
+		margin-left: calc((100vw - #{$size}) / 2);
+		margin-right: calc((100vw - #{$size}) / 2);
+	}
 
+	#controls
+	{
+		align-items: flex-start;
+
+		#leftarrow, #rightarrow
+		{
+			font-size: 5rem;
+		}
+
+		#leftarrow
+		{
+			margin-right: 7rem;
+		}
+
+		#rightarrow
+		{
+			margin-left: 7rem;
+		}
+	}
 }
