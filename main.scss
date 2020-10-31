@@ -57,12 +57,16 @@ $elementcolor: $bordercolor;
 	100% { transform: rotate(360deg); }
 }
 
-html, body
+*
 {
-	height: 100vh;
+	box-sizing: border-box;
 	margin: 0;
 	padding: 0;
-	box-sizing: border-box;
+}
+
+html, body
+{
+	height: 100%;
 }
 
 body
@@ -72,142 +76,144 @@ body
 	flex-direction: column;
 	justify-content: space-between;
 	font-family: 'Montserrat', sans-serif;
-	padding-top: 2rem;
-	padding-bottom: 2rem;
 }
 
-#viewbox
+.square
 {
-	height: 60%;
-	overflow: hidden;
+	$size: 300px;
+	min-width: $size;
+	height: $size;
 	display: flex;
-	align-items: center;
+	flex-direction: column;
+	position: relative;
+	margin-left: calc((100vw - #{$size}) / 2);
+	margin-right: calc((100vw - #{$size}) / 2);
+	overflow: hidden;
+	padding: 2rem;
+	border: 1px solid $bordercolor;
 
-	#slider
+	.row-even
+	{
+		.col-even
+		{
+			.triangle
+			{
+				clip-path: polygon(50% 100%, 0% 0%, 100% 0%) !important;
+			}
+		}
+
+		.col:not(.col-even)
+		{
+			.triangle
+			{
+				clip-path: polygon(50% 0%, 0% 100%, 100% 100%) !important;
+			}
+		}
+	}
+
+	.row:not(.row-even)
+	{
+		.col-even
+		{
+			.triangle
+			{
+				clip-path: polygon(50% 0%, 0% 100%, 100% 100%) !important;
+			}
+		}
+
+		.col:not(.col-even)
+		{
+			.triangle
+			{
+				clip-path: polygon(50% 100%, 0% 0%, 100% 0%) !important;
+			}
+		}
+	}
+
+	.row
 	{
 		display: flex;
-		transition: margin-left .3s ease-in-out;
+		justify-content: center;
 
-		.square
+		.col
 		{
-			$width: 80vmin;
-			min-width: $width;
-			height: $width;
 			display: flex;
 			flex-direction: column;
-			position: relative;
-			overflow: hidden;
-			margin-left: (100 - $width) / 2;
-			padding: (100 - $width) / 2;
-			border: 1px solid $bordercolor;
-			box-sizing: border-box;
+			justify-content: center;
+			align-items: center;
 
-			.row-even
+			.circle
 			{
-				.col-even
-				{
-					.triangle
-					{
-						clip-path: polygon(50% 100%, 0% 0%, 100% 0%) !important;
-					}
-				}
-
-				.col:not(.col-even)
-				{
-					.triangle
-					{
-						clip-path: polygon(50% 0%, 0% 100%, 100% 100%) !important;
-					}
-				}
+				background-color: $elementcolor;
+				height: 20%;
+				width: 20%;
+				border-radius: 50%;
+				animation-direction: alternate;
 			}
 
-			.row:not(.row-even)
+			.triangle
 			{
-				.col-even
-				{
-					.triangle
-					{
-						clip-path: polygon(50% 0%, 0% 100%, 100% 100%) !important;
-					}
-				}
-
-				.col:not(.col-even)
-				{
-					.triangle
-					{
-						clip-path: polygon(50% 100%, 0% 0%, 100% 0%) !important;
-					}
-				}
+				background-color: $elementcolor;
+				height: 70%;
+				width: 70%;
+				clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
 			}
 
-			.row
+			.spinny
 			{
-				display: flex;
-				justify-content: center;
-
-				.col
-				{
-					display: flex;
-					flex-direction: column;
-					justify-content: center;
-					align-items: center;
-
-					.circle
-					{
-						background-color: $elementcolor;
-						height: 20%;
-						width: 20%;
-						border-radius: 50%;
-						animation-direction: alternate;
-					}
-
-					.triangle
-					{
-						background-color: $elementcolor;
-						height: 70%;
-						width: 70%;
-						clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
-					}
-
-					.spinny
-					{
-						background-color: $elementcolor;
-						width: 7%;
-						height: 100%;
-						border-radius: 50px;
-					}
-				}
+				background-color: $elementcolor;
+				width: 7%;
+				height: 100%;
+				border-radius: 50px;
 			}
 		}
 	}
 }
 
+.disabled
+{
+	color: gray !important;
+}
+
+#viewbox
+{
+	width: 100%;
+	height: 80%;
+	overflow-x: hidden;
+
+	#slider
+	{
+		display: flex;
+		align-items: center;
+		width: auto;
+		height: 100%;
+		transition: margin-left .5s ease;
+	}
+}
+
 #controls
 {
-	height: 30%;
+	width: 100%;
+	flex-grow: 1;
 	display: flex;
-	flex-direction: grow;
 	justify-content: space-between;
-	align-items: center;
 
-	div
+	#leftarrow, #rightarrow
 	{
-		$width: 60px;
-		width: $width;
-		height: $width;
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		border: 1px solid $elementcolor;
-		margin: 2rem;
-		border-radius: 50%;
+		color: $elementcolor;
+		display: inline-block;
+		font-size: 3.5rem;
+		font-weight: normal;
+	}
 
-		p
-		{
-			color: $elementcolor;
-			font-size: 2rem;
-			margin: 0rem;
-		}
+	#leftarrow
+	{
+		margin-left: 3rem;
+	}
+
+	#rightarrow
+	{
+		margin-right: 3rem;
 	}
 }
 

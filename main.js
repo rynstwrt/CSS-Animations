@@ -3,6 +3,7 @@ const numSquares = 9;
 const rows = 15;
 const columns = 15;
 let index = 1;
+let isInTransition = false;
 
 function populateSquareWithSpinnies(square)
 {
@@ -70,10 +71,8 @@ function populateSquareWithTriangles(square)
 	}
 }
 
-function moveSlider(direction)
+function initSquareFromIndex()
 {
-	const previousSquare = (direction === 'right') ? $(`#square${index - 1}`) : $(`#square${index + 1}`);
-
 	switch (index)
 	{
 		case 1:
@@ -104,40 +103,63 @@ function moveSlider(direction)
 			initSquare9();
 			break;
 	}
+}
 
-	const slider = $('#slider');
- 	const squareMarginLeft = parseInt($(`#square${index}`).css('margin-left'));
-	const leftEquation = window.innerWidth * (index - 1) - squareMarginLeft * (index - 1);
+function moveSliderToIndex(isLeft)
+{
+	isInTransition = true;
 
-	slider.css({'margin-left': `${-leftEquation}px`});
+	$('#slider').css({'margin-left': `${(index - 1) * window.innerWidth * -1}px`});
 
-	slider.one(browserTransitionEndEvents, () =>
+	initSquareFromIndex();
+
+	$('#slider').on(browserTransitionEndEvents, () =>
 	{
-		previousSquare.children().remove();
+		const previousSquareIndex = isLeft ? index + 1 : index - 1;
+		$(`#square${previousSquareIndex}`).children().remove();
+		isInTransition = false;
 	});
 }
 
 $(document).ready(() =>
 {
 	initSquare1();
+	$('#leftarrow').addClass('disabled');
 
 	$('#leftarrow').click(() =>
 	{
-		if (index <= 1) return;
+		if (isInTransition || $('#leftarrow').hasClass('disabled'))
+			return;
+
+		if (index === numSquares)
+			$('#rightarrow').removeClass('disabled');
+
+		if (index === 2)
+			$('#leftarrow').addClass('disabled');
+
 		--index;
-		moveSlider('left');
+
+		moveSliderToIndex(true);
 	});
 
 	$('#rightarrow').click(() =>
 	{
-		if (index >= numSquares) return;
+		if (isInTransition || $('#rightarrow').hasClass('disabled'))
+			return;
+
+		if (index === 1)
+			$('#leftarrow').removeClass('disabled');
+
+		if (index + 1 === numSquares)
+			$('#rightarrow').addClass('disabled');
+
 		++index;
-		moveSlider('right');
+
+		moveSliderToIndex(false);
 	});
 });
 
-// $(window).resize(() =>
-// {
-// 	$('.square').children().remove();
-// 	init();
-// });
+$(window).resize(() =>
+{
+	//TODO
+});
